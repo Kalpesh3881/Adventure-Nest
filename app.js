@@ -23,10 +23,9 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/makeNest", async (req, res) => {
-  const newNest = new Nest({ title: "Back Yard" });
-  await newNest.save();
-  res.send(newNest);
+app.get("/nests", async (req, res) => {
+  const nests = await Nest.find({});
+  res.render("nests/index", { nests });
 });
 
 app.listen(3000, () => {
