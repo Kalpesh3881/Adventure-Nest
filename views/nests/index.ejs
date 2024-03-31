@@ -7,9 +7,12 @@
   </head>
   <body>
     <h1>All Nests!</h1>
+    <div>
+      <a href="/nests/new">Add New Nest</a>
+    </div>
     <ul>
       <% for (let nest of nests) {%>
-      <li><%= nest.title %></li>
+      <li><a href="/nests/<%= nest._id %>"><%= nest.title %></a></li>
       <% }%>
     </ul>
   </body>
