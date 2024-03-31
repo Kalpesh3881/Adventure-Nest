@@ -1,0 +1,26 @@
+Adventure Nest: 
+
+1. npm init -y	// to initialize a new Node.js Project --> will create package.json file for project
+
+2. npm i express mongoose ejs // to install three Node.js packages (dependencies) for a web development project.
+
+-->express: This is a fast, unopinionated, minimalist web framework for Node.js. 
+It simplifies the process of building robust web applications by providing a set of features and tools for handling routes, managing middleware, and handling HTTP requests and responses. 
+Express is widely used in the Node.js ecosystem for building web servers and APIs.
+
+-->mongoose: Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js.
+It provides a higher-level abstraction over the MongoDB Node.js driver, making it easier to interact with MongoDB databases.
+Mongoose allows you to define schemas, models, and perform CRUD (Create, Read, Update, Delete) operations on MongoDB documents using JavaScript.
+
+-->ejs: EJS (Embedded JavaScript) is a templating engine for Node.js. It allows you to embed JavaScript code directly within your HTML templates, making it easier 
+to generate dynamic content on the server side. EJS templates can include variables, control structures, and partials, providing a flexible and powerful way
+to generate HTML dynamically.
+
+
+3. npm install -g nodemon  
+-->nodemon is a utility that monitors for changes in your Node.js application and automatically restarts the server when changes are detected. 
+It's commonly used during development to streamline the development process and avoid manual server restarts.
+
+4. nodemon app.js -> To Start server
+
+5. Database Connection String: mongodb://localhost:27017/AdventureNest
