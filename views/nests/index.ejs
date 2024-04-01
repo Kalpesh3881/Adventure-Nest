@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nests</title>
-  </head>
-  <body>
-    <h1>All Nests!</h1>
-    <div>
-      <a href="/nests/new">Add New Nest</a>
-    </div>
-    <ul>
-      <% for (let nest of nests) {%>
-      <li><a href="/nests/<%= nest._id %>"><%= nest.title %></a></li>
-      <% }%>
-    </ul>
-  </body>
-</html>
+<%layout('layouts/boilerplate')%>
+<h1>All Nests!</h1>
+<div>
+  <a href="/nests/new">Add New Nest</a>
+</div>
+<ul>
+  <% for (let nest of nests) {%>
+  <li><a href="/nests/<%= nest._id %>"><%= nest.title %></a></li>
+  <% }%>
+</ul>

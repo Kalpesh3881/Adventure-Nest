@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const Nest = require("./models/AdventureNest");
+const ejsMate = require("ejs-mate");
 const exp = require("constants");
 
 //Database connection
@@ -17,6 +18,7 @@ db.once;
 
 const app = express();
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
