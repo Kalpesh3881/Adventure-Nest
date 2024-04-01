@@ -1,7 +1,8 @@
 <%layout('layouts/boilerplate')%>
-
 <h1><%= nest.title %></h1>
 <h2><%= nest.location %></h2>
+<img src="<%= nest.image %>" alt="">
+<p><%= nest.description %></p>
 <p>
     <a href="/nests/<%=nest._id%>/edit">Edit</a>
 </p>

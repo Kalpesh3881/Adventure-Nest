@@ -20,9 +20,14 @@ const seedDB = async () => {
   await Nest.deleteMany({});
   for (let i = 0; i < 50; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
+    const price = Math.floor(Math.random() * 20) + 10;
     const nest = new Nest({
       location: `${cities[random1000].city},${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      image: "./imgs/woods.jpg",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam non vero voluptatem, rerum optio iure perferendis corporis, beatae dolorem impedit numquam illum cupiditate eligendi modi? Aspernatur est quis asperiores quidem.",
+      price,
     });
 
     await nest.save();
