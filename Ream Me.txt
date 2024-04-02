@@ -24,3 +24,7 @@ It's commonly used during development to streamline the development process and 
 4. nodemon app.js -> To Start server
 
 5. Database Connection String: mongodb://localhost:27017/AdventureNest
+
+Application ID: 586127
+Access Key : fMnSMqxs-SzoRYgExn1w21GpzZPwzLw7gujHMk5SICk
+SecretKey : ytm2s54npJ_xBmyJcw-MkSpcwJAsJLf_fUjH6FN-Szs
