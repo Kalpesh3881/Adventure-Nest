@@ -24,7 +24,7 @@ const seedDB = async () => {
     const nest = new Nest({
       location: `${cities[random1000].city},${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: "./imgs/woods.jpg",
+      image: "./  imgs/woods.jpg",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam non vero voluptatem, rerum optio iure perferendis corporis, beatae dolorem impedit numquam illum cupiditate eligendi modi? Aspernatur est quis asperiores quidem.",
       price,
