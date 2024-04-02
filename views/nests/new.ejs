@@ -1,14 +1,52 @@
 <%layout('layouts/boilerplate')%>
 
-<form action="/nests" method="post">
-  <div>
-    <label for="title">Title</label>
-    <input type="text" id="title" name="nest[title]" />
+<div class="row">
+  <h1 class="text-center">New Nest</h1>
+  <div class="col-6 offset-3">
+    <form action="/nests" method="post">
+      <div class="mb-2">
+        <label class="form-lable" for="title">Title</label>
+        <input class="form-control" type="text" id="title" name="nest[title]" />
+      </div>
+      <div class="mb-2">
+        <label class="form-lable" for="location">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          id="location"
+          name="nest[location]"
+        />
+      </div>
+      <div class="mb-2">
+        <label class="form-lable" for="image">Image Url</label>
+        <input class="form-control" type="text" id="image" name="nest[image]" />
+      </div>
+      <div class="mb-2">
+        <label class="form-lable" for="price">Nest Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-lable">$</span>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            placeholder="0.00"
+            aria-label="price"
+            aria-describedby="price-lable"
+            name="nest[price]"
+          />
+        </div>
+      </div>
+      <div class="mb-2">
+        <label class="form-lable" for="description">Description</label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="description"
+          name="nest[description]"
+        ></textarea>
+      </div>
+      <div class="mb-2"><button class="btn btn-success">Add Nest</button></div>
+    </form>
+    <a href="/nests">All Nests</a>
   </div>
-  <div>
-    <label for="location">Location</label>
-    <input type="text" id="location" name="nest[location]" />
-  </div>
-  <button>Add Nest</button>
-</form>
-<a href="/nests">All Nests</a>
+</div>
