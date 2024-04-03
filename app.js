@@ -5,6 +5,7 @@ const methodOverride = require("method-override");
 const Nest = require("./models/AdventureNest");
 const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
+const ExpressError = require("./utils/ExpressError");
 const exp = require("constants");
 
 //Database connection
@@ -45,6 +46,7 @@ app.get("/nests/new", (req, res) => {
 app.post(
   "/nests",
   catchAsync(async (req, res, next) => {
+    if (!req.body.nest) throw new ExpressError("Invalid Nest Data", 400);
     const nest = new Nest(req.body.nest);
     await nest.save();
     res.redirect(`/nests/${nest._id}`);
@@ -85,8 +87,14 @@ app.delete(
   })
 );
 
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
+
 app.use((err, req, res, next) => {
-  res.send("Somthing went Wrong..!");
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Somthing went Wrong..!";
+  res.status(statusCode).render("error", { err });
 });
 
 app.listen(3000, () => {
