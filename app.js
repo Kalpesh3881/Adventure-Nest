@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
 const Joi = require("joi");
 const ExpressError = require("./utils/ExpressError");
+const { nestSchema } = require("./Schemas.js");
 const exp = require("constants");
 
 //Database connection
@@ -27,6 +28,16 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+const validateNest = (req, res, next) => {
+  const { error } = nestSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(", ");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
 //End points
 app.get("/", (req, res) => {
   res.render("home");
@@ -46,22 +57,9 @@ app.get("/nests/new", (req, res) => {
 
 app.post(
   "/nests",
+  validateNest,
   catchAsync(async (req, res, next) => {
     // if (!req.body.nest) throw new ExpressError("Invalid Nest Data", 400);
-    const nestSchema = Joi.object({
-      nest: Joi.object({
-        title: Joi.string().required(),
-        price: Joi.number().required().min(0),
-        image: Joi.string().required(),
-        location: Joi.string().required(),
-        description: Joi.string().required(),
-      }).required(),
-    });
-    const { error } = nestSchema.validate(req.body);
-    if (error) {
-      const msg = error.details.map((el) => el.message).join(", ");
-      throw new ExpressError(msg, 400);
-    }
     const nest = new Nest(req.body.nest);
     await nest.save();
     res.redirect(`/nests/${nest._id}`);
@@ -86,6 +84,7 @@ app.get(
 
 app.put(
   "/nests/:id",
+  validateNest,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const nest = await Nest.findByIdAndUpdate(id, { ...req.body.nest });
