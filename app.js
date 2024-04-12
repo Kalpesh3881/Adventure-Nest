@@ -5,6 +5,7 @@ const methodOverride = require("method-override");
 const Nest = require("./models/AdventureNest");
 const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync");
+const Joi = require("joi");
 const ExpressError = require("./utils/ExpressError");
 const exp = require("constants");
 
@@ -46,7 +47,21 @@ app.get("/nests/new", (req, res) => {
 app.post(
   "/nests",
   catchAsync(async (req, res, next) => {
-    if (!req.body.nest) throw new ExpressError("Invalid Nest Data", 400);
+    // if (!req.body.nest) throw new ExpressError("Invalid Nest Data", 400);
+    const nestSchema = Joi.object({
+      nest: Joi.object({
+        title: Joi.string().required(),
+        price: Joi.number().required().min(0),
+        image: Joi.string().required(),
+        location: Joi.string().required(),
+        description: Joi.string().required(),
+      }).required(),
+    });
+    const { error } = nestSchema.validate(req.body);
+    if (error) {
+      const msg = error.details.map((el) => el.message).join(", ");
+      throw new ExpressError(msg, 400);
+    }
     const nest = new Nest(req.body.nest);
     await nest.save();
     res.redirect(`/nests/${nest._id}`);
